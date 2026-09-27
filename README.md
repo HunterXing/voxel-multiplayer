@@ -10,6 +10,28 @@
 
 ---
 
+## 提示词
+
+这个项目是从下面这段提示词开始做的,原样保留以便复现:
+
+> Build a browser-based multiplayer voxel sandbox for [PLAYER COUNT] local or remote players.
+> Implement a small generated world, first-person movement, block placement/removal, player names,
+> synchronized transforms, and authoritative conflict handling for block edits.
+> Use [NETWORK STACK] and keep the server setup minimal.
+> Provide one command for the server and one for the client. Open two clients, verify join/leave
+> behavior and state synchronization, and document known limits around persistence, latency, and cheating.
+
+两个占位符的取舍:
+
+| 占位符 | 最终选择 | 理由 |
+| --- | --- | --- |
+| `[PLAYER COUNT]` | **8 人** | 够开两个客户端做真实验证;再多就需要分块视野和更严格的兴趣管理 |
+| `[NETWORK STACK]` | **原生 `ws` + 手写 JSON 协议** | 服务端只留 1 个运行时依赖,权威校验 / 快照广播 / 冲突仲裁全部自己写,协议时序能讲清楚 |
+
+第一版交付后追加的需求:工具与剑(可攻击)、猪/山羊/鸡、PvP 与死亡重生、第一人称手持模型。
+
+---
+
 ## 两条命令
 
 ```bash
@@ -24,8 +46,8 @@ npm run client     # 客户端（vite），打开 http://localhost:5173
 | 命令 | 作用 |
 | --- | --- |
 | `npm run dev` | 用 `concurrently` 同时起上面两个 |
-| `npm test` | 50 个测试：worldgen 确定性 / 协议校验 / 网格化几何 / 多客户端集成 |
-| `npm run build` | 打包客户端到 `dist/`（146 KB gzip） |
+| `npm test` | 83 个测试：worldgen 确定性 / 协议校验 / 网格化几何 / 战斗与动物 / 多客户端集成 |
+| `npm run build` | 打包客户端到 `dist/`（151 KB gzip） |
 
 **开两个客户端**验证:把上面的 `npm run client` 打开两个标签页(或两个窗口),各填一个名字即可。
 想一次点开两个,直接用带参数的地址:
