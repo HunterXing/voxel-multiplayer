@@ -1,0 +1,40 @@
+{
+  "name": "voxel-multiplayer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Browser multiplayer voxel sandbox: authoritative Node WebSocket server + three.js client. Seeded worldgen, compare-and-swap block edits, tools, server-authoritative mobs and PvP.",
+  "scripts": {
+    "server": "node --watch server/index.js",
+    "server:once": "node server/index.js",
+    "client": "vite",
+    "dev": "concurrently -n server,client -c cyan,magenta \"npm:server\" \"npm:client\"",
+    "build": "vite build",
+    "test": "node --test test/unit.test.js test/mesher.test.js test/combat.test.js test/integration.test.js"
+  },
+  "dependencies": {
+    "three": "^0.186.1",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "vite": "^8.3.1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "voxel",
+    "multiplayer",
+    "game",
+    "threejs",
+    "websocket",
+    "authoritative-server",
+    "voxel-sandbox"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HunterXing/voxel-multiplayer.git"
+  },
+  "homepage": "https://github.com/HunterXing/voxel-multiplayer#readme",
+  "engines": {
+    "node": ">=20.19"
+  }
+}
